@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add/Remove Player</title>
+    <script>
+        function addPlayer(e){
+            e.preventDefault();
+
+            var id = document.getElementById("pid").value;
+            var pname = document.getElementById("pname").value;
+            var pruns = document.getElementById("runs").value;
+            var tableBody = document.getElementById("player");
+
+            var addButton = document.getElementById("addplayer");
+             var newRow = tableBody.insertRow();
+             var idcell = newRow.insertCell(0);
+             var namecell = newRow.insertCell(1);
+             var runcell = newRow.insertCell(2);
+             var checkbox = newRow.insertCell(3);
+
+             idcell.innerHTML=id;
+             namecell.innerHTML=pname;
+             runcell.innerHTML=pruns;
+             checkbox.innerHTML= "<input type=checkbox value=id/>"
+
+
+        }
+        
+        function removeplayer(e){
+            e.preventDefault();
+            var table = document.getElementById("player");
+            for(var i = 1; i <table.rows.length; i++){
+                var checkbox = table.rows[i].cells[3].querySelector("input[type=checkbox]");
+                if(checkbox&&checkbox.checked){
+                    table.deleteRow(i);
+                }
+                    
+                    
+                
+            }
+            
+        }
+    </script>
+</head>
+<body>
+    <form action="">
+        Player Id : 
+        <input type="text" name="pid" id="pid"><br><br>
+        Player Name : 
+        <input type="text" name="pname" id="pname"><br><br>
+        Runs : <input type="text" name="runs" id="runs"><br><br>
+        <button type="submit" id="addplayer" onclick="addPlayer(event)">Add Player</button>
+        <button type="submit" id="removeplayer" onclick="removePlayer(event)">Remove Player</button>
+
+    </form>
+    <br><br>
+    <table id="player" border="2px" style="margin: 10px;">
+        <thead>
+        <tr>
+            <th style="padding-right: 10px;">Player ID</th>
+            <th style="padding-right: 10px;">Player Name</th>
+            <th style="padding-right: 10px;">Runs</th>
+            <th style="padding-right: 10px;">Select</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+
+    </table>
+</body>
+</html>
