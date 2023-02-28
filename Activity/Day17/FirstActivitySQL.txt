@@ -1,0 +1,152 @@
+1. Display the name of movies, movie type is starts with Drama
+
+mysql> select Moviename from movie where movietype like 'Drama%';
++------------------------+
+| Moviename              |
++------------------------+
+| Padmavaat              |
+| Badhaai Ho             |
+| Rangoon                |
+| Bahubali-The Beginning |
+| Maryada Ramanna        |
+| Khaidi No.150          |
+| Rangasthalam           |
+| The Villain            |
++------------------------+
+8 rows in set (0.00 sec)
+=====================================================================================================================
+
+2. Display the movies acted by actor Ayshmann.
+
+
+
+mysql> select Moviename from movie where Heroname='Ayushmann';
++------------+
+| Moviename  |
++------------+
+| Badhaai Ho |
+| Andhadhun  |
++------------+
+2 rows in set (0.00 sec)
+=========================================================================================================================
+
+3. Display the count of movies, having length above 18.
+
+
+mysql> Select Count(moviename) from movie where length>18;
++------------------+
+| Count(moviename) |
++------------------+
+|                6 |
++------------------+
+1 row in set (0.00 sec)
+=================================================================================================================================
+
+4. Display the movie having minimum length.
+
+mysql> select moviename from movie where length = (select min(length) from movie);
++---------------------+
+| moviename           |
++---------------------+
+| Badhaai Ho          |
+| The House Next Door |
+| Gruham              |
+| Aval                |
++---------------------+
+4 rows in set (0.00 sec)
+============================================================================================================================================
+
+5. Display all the details of movie, the language that first name starts with 
+‘T’
+
+
+mysql> select * from movie where language like 'T%';
++---------+------------------------+-------------+----------+-------------+----------+--------+----------------+--------------+
+| Movieid | Moviename              | Heroname    | Heroine  | ReleaseDate | Language | Length | Movietype      | Productionid |
++---------+------------------------+-------------+----------+-------------+----------+--------+----------------+--------------+
+|     201 | Bahubali-The Beginning | Prabhas     | Tamannah | 2015-07-10  | Telugu   |     21 | Drama Fantasy  |         9091 |
+|     206 | Maryada Ramanna        | Sunil       | Saloni   | 2010-07-23  | Telugu   |     19 | Drama          |         9091 |
+|     211 | Khaidi No.150          | chiranjeevi | Kajal    | 2017-01-11  | Telugu   |     20 | Drama Thriller |         8892 |
+|     224 | Rangasthalam           | Ram Charan  | Samatha  | 2018-03-30  | Telugu   |     17 | Drama Period   |         7682 |
+|     231 | Bharath Ane nenu       | Mahesh Babu | Kiara    | 2018-04-20  | Telugu   |     15 | Thriller       |         7882 |
+|     244 | Gruham                 | Siddharth   | Andrea   | 2018-11-17  | Telugu   |     14 | Horror         |         1899 |
+|     267 | Anaganaga O Dheerudu   | Siddharth   | Shruthi  | 2014-01-14  | Telugu   |     16 | Fantasy        |         9091 |
+|     501 | 2.0                    | Rajnikanth  | Amy      | 2018-11-29  | Tamil    |     20 | Scientific     |         8892 |
+|     577 | Aval                   | Siddharth   | Andrea   | 2017-11-03  | Tamil    |     14 | Horror         |         1899 |
++---------+------------------------+-------------+----------+-------------+----------+--------+----------------+--------------+
+9 rows in set (0.00 sec)
+==============================================================================================================================================
+
+
+6. Display the movie name, hero name, heroine name whose having 
+maximum length.
+
+mysql> select Moviename,Heroname,Heroine from movie where length =(select max(length) from movie);
++------------------------+---------------+------------------+
+| Moviename              | Heroname      | Heroine          |
++------------------------+---------------+------------------+
+| Padmavaat              | Shahid Kapoor | Deepika Padukone |
+| Bahubali-The Beginning | Prabhas       | Tamannah         |
+| K G F Chapter 1        | Yash          | Srinithi shetty  |
++------------------------+---------------+------------------+
+3 rows in set (0.00 sec)
+================================================================================================================================================
+
+
+7. Display the movie name, hero name, heroine name the movie released 
+after 15 march 2018.
+
+
+mysql> select Moviename,Heroname,Heroine from movie where ReleaseDate > '2018-03-15';
++------------------+-------------+-----------------+
+| Moviename        | Heroname    | Heroine         |
++------------------+-------------+-----------------+
+| Badhaai Ho       | Ayushmann   | Neena           |
+| Andhadhun        | Ayushmann   | Radika Apte     |
+| Zero             | Shah Ruck   | Katrina Kaif    |
+| Rangasthalam     | Ram Charan  | Samatha         |
+| Bharath Ane nenu | Mahesh Babu | Kiara           |
+| Gruham           | Siddharth   | Andrea          |
+| K G F Chapter 1  | Yash        | Srinithi shetty |
+| The Villain      | Sudeep      | Amy             |
+| 2.0              | Rajnikanth  | Amy             |
++------------------+-------------+-----------------+
+9 rows in set (0.00 sec)
+==============================================================================================================================
+
+
+8. Display the count of thriller movies.
+
+
+mysql> select Count(moviename) as ThrillerMovies from movie where movietype ='Thriller';
++----------------+
+| ThrillerMovies |
++----------------+
+|              1 |
++----------------+
+1 row in set (0.00 sec)
+===============================================================================================================================
+
+9. Display the count of movies whose released before 15 march 2018.
+
+
+mysql> select count(Moviename)from movie where ReleaseDate < '2018-03-15';
++------------------+
+| count(Moviename) |
++------------------+
+|                9 |
++------------------+
+1 row in set (0.00 sec)
+================================================================================================================================
+
+10. Display the release date of the movie name ‘Zero.
+
+mysql> select ReleaseDate from movie where Moviename = 'Zero';
++-------------+
+| ReleaseDate |
++-------------+
+| 2018-12-21  |
++-------------+
+1 row in set (0.00 sec)
+=================================================================================================================================
+
