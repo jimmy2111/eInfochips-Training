@@ -1,0 +1,135 @@
+1.Write the query to display productionid, production name with total number 
+movies produced by each.
+
+
+mysql> select productions.productionid,productions.productionname,count(productions.productionname) as NumberOfMovies from productions Inner Join Movie 
+on productions.productionid=movie.productionid Group By productions.productionname, productions.productionid;
++--------------+----------------------------+----------------+
+| productionid | productionname             | NumberOfMovies |
++--------------+----------------------------+----------------+
+|         1010 | Hari Om Entertainment      |              1 |
+|         1854 | Junglee Pictures           |              1 |
+|         1899 | Viacom18 Studios           |              6 |
+|         1988 | Red Chillies Entertainment |              1 |
+|         2341 | CRM                        |              1 |
+|         6773 | Hombale Films              |              1 |
+|         7682 | Mythri Movie Makers        |              1 |
+|         7882 | DVV Entertainments         |              1 |
+|         8892 | Lyca Productions           |              2 |
+|         9091 | Arkamediaworks             |              3 |
++--------------+----------------------------+----------------+
+10 rows in set (0.00 sec)
+================================================================================
+
+
+
+2.Write the query to display production name, owner name have produced more 
+than 2 movies.
+
+mysql> select productions.productionname, productions.ownername from productions Inner Join Movie ON productions.productionid=movie.productionid Group By productions.ownername,productions.productionname 
+having count(moviename)>2;
++------------------+------------------+
+| productionname   | ownername        |
++------------------+------------------+
+| Viacom18 Studios | Ajit Andhare     |
+| Arkamediaworks   | Shobu Yarlagadda |
++------------------+------------------+
+2 rows in set (0.00 sec)
+=============================================================================================
+
+
+3.Write the query to display production name, owner name have produced 
+maximum movies
+
+mysql> select productions.productionname, productions.ownername from productions Inner Join Movie ON productions.productionid=movie.productionid Group By productions.ownername,productions.productionname order by count(*) desc limit 1;
++------------------+--------------+
+| productionname   | ownername    |
++------------------+--------------+
+| Viacom18 Studios | Ajit Andhare |
++------------------+--------------+
+1 row in set (0.00 sec)
+===============================================================================================
+
+4.Write the query to display the heroname acted in the producer name=
+’Subaskaran’.
+
+
+mysql> select m.Heroname from productions p Inner Join Movie m ON p.productionid=m.productionid where p.ownername='Subaskaran';
++-------------+
+| Heroname    |
++-------------+
+| chiranjeevi |
+| Rajnikanth  |
++-------------+
+2 rows in set (0.00 sec)
+================================================================================================
+
+5.Write the query to display the moviename, heroname whose productionid
+ends with 82.
+
+mysql> select Moviename,Heroname from movie where productionid like '%82';
++------------------+-------------+
+| Moviename        | Heroname    |
++------------------+-------------+
+| Rangasthalam     | Ram Charan  |
+| Bharath Ane nenu | Mahesh Babu |
++------------------+-------------+
+2 rows in set (0.00 sec)
+==================================================================================================
+
+6.Write the query to display the productionname, ownername who has not 
+produced the movie.
+
+mysql> select p.productionname,p.ownername from productions p Left Join Movie m ON p.productionid=m.productionid where m.productionid IS NULL;
++----------------+-----------+
+| productionname | ownername |
++----------------+-----------+
+| STP            | Sree      |
++----------------+-----------+
+1 row in set (0.00 sec)
+====================================================================================================
+
+7.Write the query to display the productionname, ownername who has not 
+produced the ‘hindi’ movie.
+
+mysql> select productionname,ownername from productions where productions.productionid NOT IN (Select productionid from movie where language = 'hindi');
++---------------------+------------------+
+| productionname      | ownername        |
++---------------------+------------------+
+| STP                 | Sree             |
+| CRM                 | Manohar          |
+| Hombale Films       | Vijay            |
+| Mythri Movie Makers | Naveen Yerneni   |
+| DVV Entertainments  | DVV Danayya      |
+| Lyca Productions    | Subaskaran       |
+| Arkamediaworks      | Shobu Yarlagadda |
++---------------------+------------------+
+7 rows in set (0.00 sec)
+=====================================================================================================
+
+8.Write the query name to display the heroinename who acted in the different 
+productions but not in same production id.
+===============================================================================================================
+
+9.Write the query to display the heroname who acted in maximum languages.
+
+mysql> select m.heroname from movie m Inner Join Productions p ON m.productionid=p.productionid group by m.heroname order by count(m.language) desc limit 1;
++-----------+
+| heroname  |
++-----------+
+| Siddharth |
++-----------+
+1 row in set (0.00 sec)
+====================================================================================================================
+
+10.Write the query to display the production name, owner name who has 
+produced movie for more languages.
+
+mysql> select p.productionname,p.ownername from movie m Inner Join Productions p ON m.productionid=p.productionid group by p.productionname,p.ownername order by count(m.language) desc limit 1;
++------------------+--------------+
+| productionname   | ownername    |
++------------------+--------------+
+| Viacom18 Studios | Ajit Andhare |
++------------------+--------------+
+1 row in set (0.00 sec)
+======================================================================================================
