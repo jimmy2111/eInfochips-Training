@@ -11,29 +11,13 @@ public class SkillDAO {
 		Skill skill = new Skill();
 		
 		Connection c = MyConfig.getConnection();
-		PreparedStatement ps = c.prepareStatement("select skill_id from player where skill_id=?");
+		PreparedStatement ps = c.prepareStatement("select * from skill where id=?");
 		ps.setLong(1, id);
 		skill.setSkillId(id);
 		ResultSet rs = ps.executeQuery();
 		
 		while(rs.next()) {
-			if(id== 1) {
-				skill.setSkillName("Batting");
-				
-			}
-			if(id== 2) {
-				skill.setSkillName("Bowling");
-				
-			}
-			if(id == 3) {
-				skill.setSkillName("Batting Keeping");
-				
-			}
-			if(id == 4) {
-				skill.setSkillName("All Rounder");
-				
-			}
-
+			skill.setSkillName(rs.getString(2));
 		}
 		c.close();
 		return skill;
