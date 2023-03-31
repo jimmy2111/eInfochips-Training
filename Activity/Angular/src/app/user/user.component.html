@@ -1,0 +1,18 @@
+<form (submit)="onSubmit()">
+    Enter Id: <input type="number"[(ngModel)]="userId" name="userId"><br>
+    <input type="submit" value="Submit">
+</form>
+<div *ngIf="errorMessage">{{errorMessage}}</div>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+    </tr>
+    <tr *ngFor="let user of users">
+        <td>{{user.id}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <img src="{{user.url}}" alt="">
+    </tr>
+</table>
